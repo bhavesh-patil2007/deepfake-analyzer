@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Deepfake Analyzer</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="Deepfake Analyzer home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Deepfake Analyzer</span>
+      </a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#analyzer">Analyzer</a>
+        <a href="#signals">Signals</a>
+        <a href="#limitations">Limits</a>
+      </nav>
+      <a class="nav-action" href="#analyzer">
+        <span class="plus" aria-hidden="true">+</span>
+        Analyze media
+      </a>
+    </header>
+
+    <main>
+      <section class="hero-shell" id="analyzer">
+        <div class="hero-copy">
+          <p class="eyebrow">Gemini-powered anomaly review</p>
+          <h1>Read the signal in synthetic media risk.</h1>
+          <p class="intro">
+            Upload an image or video and receive a structured, uncertainty-aware
+            report on visual manipulation indicators, temporal artifacts, and
+            practical next steps.
+          </p>
+          <div class="hero-actions">
+            <label class="button primary" for="file-input">
+              <span class="plus" aria-hidden="true">+</span>
+              Choose file
+            </label>
+            <button class="button dark" id="demo-fill" type="button">
+              View report shape
+            </button>
+          </div>
+        </div>
+
+        <section class="analyzer-panel" aria-label="Media analysis panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Upload</p>
+              <h2>Media intake</h2>
+            </div>
+            <span class="status-pill" id="status-pill">Ready</span>
+          </div>
+
+          <form id="upload-form" class="upload-form">
+            <input
+              id="file-input"
+              name="file"
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp,.mp4,.mov,.mkv,.webm"
+            />
+            <label class="drop-zone" id="drop-zone" for="file-input">
+              <span class="drop-icon" aria-hidden="true"></span>
+              <span class="drop-title">Drop media here</span>
+              <span class="drop-meta">JPG, PNG, WEBP, MP4, MOV, MKV, WEBM up to 100 MB</span>
+            </label>
+
+            <div class="file-card" id="file-card" hidden>
+              <div class="file-preview" id="file-preview" aria-hidden="true"></div>
+              <div class="file-details">
+                <strong id="file-name">No file selected</strong>
+                <span id="file-size">0 MB</span>
+              </div>
+              <button class="icon-button" id="clear-file" type="button" aria-label="Clear file">
+                ×
+              </button>
+            </div>
+
+            <button class="button submit" id="analyze-button" type="submit" disabled>
+              <span class="plus" aria-hidden="true">+</span>
+              Run analysis
+            </button>
+          </form>
+
+          <div class="privacy-note">
+            Files are sent to Google Gemini for analysis. This tool reports risk,
+            not definitive forensic proof.
+          </div>
+        </section>
+
+        <div class="orbit-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="orbit orbit-three"></div>
+          <span class="orbit-core"></span>
+          <span class="orbit-dot dot-a"></span>
+          <span class="orbit-dot dot-b"></span>
+          <span class="orbit-dot dot-c"></span>
+          <span class="orbit-label label-a">Face</span>
+          <span class="orbit-label label-b">Motion</span>
+          <span class="orbit-label label-c">Context</span>
+        </div>
+      </section>
+
+      <section class="report-section" aria-live="polite">
+        <div class="report-heading">
+          <div>
+            <p class="eyebrow">Structured output</p>
+            <h2>Risk report</h2>
+          </div>
+          <button class="button ghost" id="copy-json" type="button" disabled>Copy JSON</button>
+        </div>
+
+        <article class="report-card empty" id="report-card">
+          <div class="empty-state">
+            <span class="empty-mark" aria-hidden="true"></span>
+            <h3>Your analysis will appear here.</h3>
+            <p>
+              The report will include label, score, confidence, evidence,
+              limitations, and recommended next steps.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="signals-section" id="signals">
+        <div class="section-title">
+          <p class="eyebrow">Inspection map</p>
+          <h2>What the analyzer asks Gemini to inspect</h2>
+        </div>
+        <div class="signal-grid">
+          <article class="signal-card">
+            <span class="signal-icon warn" aria-hidden="true">×</span>
+            <h3>Boundary artifacts</h3>
+            <p>Face edges, hairlines, ears, glasses, jewelry, and accessory distortions.</p>
+          </article>
+          <article class="signal-card">
+            <span class="signal-icon warn" aria-hidden="true">×</span>
+            <h3>Physical consistency</h3>
+            <p>Lighting, shadows, skin texture, teeth, eyes, and facial geometry.</p>
+          </article>
+          <article class="signal-card">
+            <span class="signal-icon positive" aria-hidden="true">+</span>
+            <h3>Temporal behavior</h3>
+            <p>Lip sync, blinking, gaze anomalies, identity drift, and flicker.</p>
+          </article>
+          <article class="signal-card">
+            <span class="signal-icon positive" aria-hidden="true">+</span>
+            <h3>Quality context</h3>
+            <p>Compression, low resolution, blur, and false-positive risk from poor media.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="limits-section" id="limitations">
+        <div class="limits-copy">
+          <p class="eyebrow">Important limits</p>
+          <h2>This is risk analysis, not proof.</h2>
+          <p>
+            Treat results as one signal. For high-stakes decisions, combine this
+            output with source verification, provenance checks, metadata review,
+            and expert forensic analysis.
+          </p>
+        </div>
+        <div class="limits-list">
+          <div>Low-quality media can create false positives.</div>
+          <div>Authenticity cannot be proven from a single model response.</div>
+          <div>Gemini receives the uploaded file for analysis.</div>
+        </div>
+      </section>
+    </main>
+
+    <template id="report-template">
+      <div class="score-layout">
+        <div class="score-ring" id="score-ring">
+          <span id="risk-score">0</span>
+          <small>risk</small>
+        </div>
+        <div class="score-copy">
+          <div class="badge-row">
+            <span class="label-badge" id="label-badge"></span>
+            <span class="confidence-badge" id="confidence-badge"></span>
+          </div>
+          <h3 id="report-summary"></h3>
+        </div>
+      </div>
+      <div class="report-columns">
+        <section>
+          <h4>Evidence</h4>
+          <div class="stack" id="evidence-list"></div>
+        </section>
+        <section>
+          <h4>Limitations</h4>
+          <div class="stack" id="limitations-list"></div>
+        </section>
+        <section>
+          <h4>Next steps</h4>
+          <div class="stack" id="steps-list"></div>
+        </section>
+      </div>
+    </template>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
